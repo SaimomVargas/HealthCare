@@ -5,7 +5,7 @@
 ## Acesse o Site 🌐
 
 Você pode acessar o site online através do seguinte link:  
-👉 [HealthCare - Acesse Agora](https://helth-care-eight.vercel.app/)
+👉 [HealthCare - Acesse Agora](https://health-care-ptbr.vercel.app/)
 
 ## Tecnologias Utilizadas 🛠️
 
