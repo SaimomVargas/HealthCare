@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { contactFormSchema, type ContactFormData } from '../../utils/validations';
 import toast from 'react-hot-toast';
+import emailjs from '@emailjs/browser';
 
 export default function ContactForm() {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -19,13 +20,26 @@ export default function ContactForm() {
   const onSubmit = async (data: ContactFormData) => {
     setIsLoading(true);
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      if (!response.ok) throw new Error('Erro ao enviar dados');
-      toast.success('Mensagem enviada com sucesso!');
+      const templateParams = {
+        from_name: data.fullName,
+        from_email: data.email,
+        phone: data.phone,
+        plan_type: data.planType === 'individual' ? 'Pessoa Física' : 'Empresa',
+        message: data.message,
+      };
+
+      const response = await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+      
+      if (response.status === 200) {
+        toast.success('Mensagem enviada com sucesso!');
+      } else {
+        throw new Error('Erro ao enviar mensagem');
+      }
     } catch (error) {
       toast.error('Erro ao enviar a mensagem. Tente novamente.');
     } finally {
