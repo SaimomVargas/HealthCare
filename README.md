@@ -2,6 +2,11 @@
 
 **HealthCare** é uma plataforma inovadora que conecta indivíduos e empresas a vendedores de planos de saúde no Brasil. Nosso objetivo é fornecer informações detalhadas sobre as opções disponíveis, destacando os diferenciais de cada plano, para que nossos clientes possam tomar decisões informadas e encontrar o plano que melhor atenda às suas necessidades.
 
+## Acesse o Site 🌐
+
+Você pode acessar o site online através do seguinte link:  
+👉 [HealthCare - Acesse Agora](https://helth-care-eight.vercel.app/)
+
 ## Tecnologias Utilizadas 🛠️
 
 - **React** (v18.2.0): Biblioteca JavaScript para construção de interfaces de usuário.
@@ -22,3 +27,4 @@
 - **src/components**: Contém os componentes reutilizáveis da aplicação, incluindo o formulário de contato.
 - **src/utils/validations.ts**: Define os esquemas de validação utilizando Zod para garantir a integridade dos dados nos formulários.
 - **public**: Diretório para arquivos públicos, como imagens e ícones.
+
