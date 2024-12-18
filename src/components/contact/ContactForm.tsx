@@ -17,7 +17,12 @@ export default function ContactForm() {
     resolver: zodResolver(contactFormSchema),
   });
 
+  React.useEffect(() => {
+    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+  }, []);
+
   const onSubmit = async (data: ContactFormData) => {
+    console.log('Iniciando envio do formulário:', data);
     setIsLoading(true);
     try {
       const templateParams = {
@@ -27,6 +32,7 @@ export default function ContactForm() {
         plan_type: data.planType === 'individual' ? 'Pessoa Física' : 'Empresa',
         message: data.message,
       };
+      console.log('Template params:', templateParams);
 
       const response = await emailjs.send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -34,6 +40,8 @@ export default function ContactForm() {
         templateParams,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
+      
+      console.log('Resposta EmailJS:', response);
       
       if (response.status === 200) {
         toast.success('Mensagem enviada com sucesso!');
